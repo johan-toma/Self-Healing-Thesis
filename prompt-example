@@ -1,0 +1,13 @@
+Please help me debug this code.
+{id}
+{Problem name from json-file}
+{Problem description: written in json-file}
+
+Here is the code, which contains the run-time error that must be solved.
+{additional_tool}
+{Code provided from the JSON-file}
+
+
+Solve the code according to the programming language code: {programming language in code}
+Can you identify the error and correct the solution!
+--------------------------

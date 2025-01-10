@@ -1,0 +1,242 @@
+[
+    {
+        "id": 0,
+        "programming_problem_name": "Min Max Game",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int minMaxGame(vector<int>& nums) {\n        int n = nums.size();\n        \n        while (n > 1) {\n            vector<int> newNum(n / 2, 0);\n            \n            for (int i = 0; i < n / 2; i++) {\n                if (i % 2 == 0) {\n                    newNum[i] = min(nums[2 * i], nums[2 * i + 1]);\n                } else {\n                    newNum[i] = max(nums[2 * i], nums[2 * i + 1]);\n                }\n            }\n            \n            nums = newNum;\n            n = nums.size();\n        }\n        \n        return nums[0];\n    }\n};\n```"
+    },
+    {
+        "id": 1,
+        "programming_problem_name": "Rotate List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    ListNode* rotateRight(ListNode* head, int k) {\n        if(head == NULL || head->next == NULL) return head;\n        \n        // Find the length and last node\n        ListNode* last = head;\n        int length = 1;\n        while(last->next) {\n            last = last->next;\n            length++;\n        }\n        \n        // Adjust k if it's larger than list length\n        k = k % length;\n        if(k == 0) return head;\n        \n        // Find new tail and head\n        ListNode* newTail = head;\n        for(int i = 0; i < length - k - 1; i++) {\n            newTail = newTail->next;\n        }\n        \n        // Rearrange links\n        ListNode* newHead = newTail->next;\n        newTail->next = NULL;\n        last->next = head;\n        \n        return newHead;\n    }\n};\n```"
+    },
+    {
+        "id": 2,
+        "programming_problem_name": "Climbing Stairs",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int climbStairs(int n) {\n        if (n <= 2) return n;\n        \n        vector<int> stairs(n + 1);\n        stairs[1] = 1;\n        stairs[2] = 2;\n        \n        for (int i = 3; i <= n; ++i) {\n            stairs[i] = stairs[i - 1] + stairs[i - 2];\n        }\n        \n        return stairs[n];\n    }\n};\n```"
+    },
+    {
+        "id": 3,
+        "programming_problem_name": "Add Two Numbers",
+        "fixed_solution": "Here's the corrected solution:\n\n```cpp\nclass Solution {\npublic:\n    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\n        ListNode* head = new ListNode(0);\n        ListNode* l3 = head;\n        int carry = 0;\n\n        while(l1 != NULL || l2 != NULL || carry != 0) {\n            int a = (l1 != NULL) ? l1->val : 0;\n            int b = (l2 != NULL) ? l2->val : 0;\n            int sum = a + b + carry;\n            \n            carry = sum / 10;\n            l3->val = sum % 10;\n\n            if (l1 != NULL) l1 = l1->next;\n            if (l2 != NULL) l2 = l2->next;\n\n            if (l1 != NULL || l2 != NULL || carry != 0) {\n                l3->next = new ListNode(0);\n                l3 = l3->next;\n            }\n        }\n        return head;\n    }\n};\n```"
+    },
+    {
+        "id": 4,
+        "programming_problem_name": "Maximum Binary Tree",
+        "fixed_solution": "Here's the corrected solution:\n\n```cpp\nclass Solution {\npublic:\n    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {\n        if (nums.empty()) return nullptr;\n        \n        vector<int>::iterator biggest = std::max_element(std::begin(nums), std::end(nums)); \n        TreeNode* root = new TreeNode(*biggest);\n        \n        int index = std::distance(nums.begin(), biggest);\n        \n        vector<int> leftSubarray(nums.begin(), biggest);\n        vector<int> rightSubarray(biggest + 1, nums.end());\n        \n        root->left = constructMaximumBinaryTree(leftSubarray);\n        root->right = constructMaximumBinaryTree(rightSubarray);\n        \n        return root;\n    }\n};\n```"
+    },
+    {
+        "id": 5,
+        "programming_problem_name": "Two Sum",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        for (int i = 0; i < nums.size(); i++) {\n            for (int j = i + 1; j < nums.size(); j++) {\n                if (nums[i] + nums[j] == target) {\n                    return {i, j};\n                }\n            }\n        }\n        return {};\n    }\n};\n```"
+    },
+    {
+        "id": 6,
+        "programming_problem_name": "Bulb Switcher",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int bulbSwitch(int n) {\n        return sqrt(n);\n    }\n};\n```"
+    },
+    {
+        "id": 7,
+        "programming_problem_name": "Middle of The Linked List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    ListNode* middleNode(ListNode* head) {\n        ListNode* slow = head;\n        ListNode* fast = head;\n        \n        while (fast != NULL && fast->next != NULL) {\n            slow = slow->next;\n            fast = fast->next->next;\n        }\n        \n        return slow;\n    }\n};\n```"
+    },
+    {
+        "id": 8,
+        "programming_problem_name": "Next Greater Element I",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {\n        stack<int> s;\n        unordered_map<int, int> nextgreatest;\n        \n        for (int i = nums2.size() - 1; i >= 0; i--) {\n            while (!s.empty() && s.top() <= nums2[i]) {\n                s.pop();\n            }\n            \n            nextgreatest[nums2[i]] = s.empty() ? -1 : s.top();\n            s.push(nums2[i]);\n        }\n        \n        vector<int> result;\n        for (int j = 0; j < nums1.size(); j++) {\n            result.push_back(nextgreatest[nums1[j]]);\n        }\n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 9,
+        "programming_problem_name": "Maximum Depth of Binary Tree",
+        "fixed_solution": "Here's the corrected solution:\n\n```cpp\nclass Solution {\npublic:\n    int maxDepth(TreeNode* root) {\n        if (!root) return 0;\n        return max(maxDepth(root->left), maxDepth(root->right)) + 1;\n    }\n};\n```"
+    },
+    {
+        "id": 10,
+        "programming_problem_name": "Remove Linked List Elements",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    ListNode* removeElements(ListNode* head, int val) {\n        if (head == nullptr) return nullptr;\n        \n        head->next = removeElements(head->next, val);\n        \n        return head->val == val ? head->next : head;\n    }\n};\n```"
+    },
+    {
+        "id": 11,
+        "programming_problem_name": "Delete Node in a BST",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    TreeNode* deleteNode(TreeNode* root, int key) {\n        if (!root) return NULL;\n        \n        if (key < root->val) \n            root->left = deleteNode(root->left, key);\n        else if (key > root->val) \n            root->right = deleteNode(root->right, key);\n        else {\n            // Case 1: No children\n            if (!root->left && !root->right) return NULL;\n            \n            // Case 2: One child\n            if (!root->left) return root->right;\n            if (!root->right) return root->left;\n            \n            // Case 3: Two children\n            TreeNode* temp = root->right;\n            while (temp->left) temp = temp->left;\n            root->val = temp->val;\n            root->right = deleteNode(root->right, temp->val);\n        }\n        return root;\n    }\n};\n```"
+    },
+    {
+        "id": 12,
+        "programming_problem_name": "Convert Sorted Array to Binary Search Tree",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    TreeNode* sortedArrayToBST(vector<int>& nums) {\n        return buildBST(nums, 0, nums.size() - 1);\n    }\n    \nprivate:\n    TreeNode* buildBST(vector<int>& nums, int left, int right) {\n        if (left > right) return nullptr;\n        \n        int mid = left + (right - left) / 2;\n        TreeNode* root = new TreeNode(nums[mid]);\n        \n        root->left = buildBST(nums, left, mid - 1);\n        root->right = buildBST(nums, mid + 1, right);\n        \n        return root;\n    }\n};\n```"
+    },
+    {
+        "id": 13,
+        "programming_problem_name": "Increasing Order Search Tree",
+        "fixed_solution": "```cpp\nstruct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}; };\nclass Solution {\npublic:\n    TreeNode* increasingBST(TreeNode* root) {\n        vector<int>v;\n        dfs(root,v);\n        TreeNode* ans = NULL;\n        TreeNode* temp;\n        for(auto x: v) {\n            if(ans == NULL) {\n                ans = new TreeNode(x);\n                temp = ans;\n            } else {\n                temp->right = new TreeNode(x);\n                temp = temp->right;\n            }\n        }\n        return ans;\n    }\n    \n    void dfs(TreeNode* node, vector<int>&v) {\n        if(node == NULL) return;\n        dfs(node->left, v);\n        v.push_back(node->val);\n        dfs(node->right, v);\n    }\n};\n```"
+    },
+    {
+        "id": 14,
+        "programming_problem_name": "Remove Duplicates from Sorted List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    ListNode* deleteDuplicates(ListNode* head) {\n        if (head == NULL || head->next == NULL) {\n            return head;\n        }\n        \n        ListNode* current = head;\n        \n        while (current != NULL && current->next != NULL) {\n            if (current->val == current->next->val) {\n                ListNode* duplicate = current->next;\n                current->next = current->next->next;\n                delete duplicate;\n            } else {\n                current = current->next;\n            }\n        }\n        \n        return head;\n    }\n};\n```"
+    },
+    {
+        "id": 15,
+        "programming_problem_name": "Reverse Linked List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    ListNode* reverseList(ListNode* head) {\n        ListNode *prev = nullptr;\n        ListNode *curr = head;\n        ListNode *nextNode = nullptr;\n        \n        while(curr != nullptr) {\n            nextNode = curr->next;\n            curr->next = prev;\n            prev = curr;\n            curr = nextNode;\n        }\n        \n        return prev;\n    }\n};\n```"
+    },
+    {
+        "id": 16,
+        "programming_problem_name": "Balanced Binary Tree",
+        "fixed_solution": "```cpp\nstruct TreeNode { \n    int val; \n    TreeNode *left; \n    TreeNode *right; \n    TreeNode() : val(0), left(nullptr), right(nullptr) {} \n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} \n    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} \n};\n\nclass Solution {\npublic:\n    int getHt(TreeNode* root) {\n        if (!root) return 0;\n        \n        int leftHeight = getHt(root->left);\n        int rightHeight = getHt(root->right);\n        \n        if (leftHeight == -1 || rightHeight == -1 || abs(leftHeight - rightHeight) > 1) \n            return -1;\n        \n        return 1 + max(leftHeight, rightHeight);\n    }\n    \n    bool isBalanced(TreeNode* root) {\n        return getHt(root) != -1;\n    }\n};\n```"
+    },
+    {
+        "id": 17,
+        "programming_problem_name": "Next Greater Node in Linked List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> nextLargerNodes(ListNode* head) {\n        vector<int> v;\n        while(head) {\n            v.push_back(head->val);\n            head = head->next;\n        }\n        int n = v.size();\n        vector<int> result(n, 0);\n        \n        for(int i = 0; i < n - 1; i++) {\n            for(int j = i + 1; j < n; j++) {\n                if(v[j] > v[i]) {\n                    result[i] = v[j];\n                    break;\n                }\n            }\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 18,
+        "programming_problem_name": "Sum of Left Leaves",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int sumOfLeftLeaves(TreeNode* root) {\n        if (!root) return 0;\n        \n        int sum = 0;\n        if (root->left && !root->left->left && !root->left->right) {\n            sum += root->left->val;\n        }\n        \n        sum += sumOfLeftLeaves(root->left);\n        sum += sumOfLeftLeaves(root->right);\n        \n        return sum;\n    }\n};\n```"
+    },
+    {
+        "id": 19,
+        "programming_problem_name": "Swapping Nodes in Linked List",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int length(ListNode* head) {\n        int cnt = 0;\n        while (head != nullptr) {\n            cnt++;\n            head = head->next;\n        }\n        return cnt;\n    }\n    \n    ListNode* swapNodes(ListNode* head, int k) {\n        int n = length(head);\n        int end = n - k + 1;\n        \n        ListNode* t1 = head;\n        ListNode* t2 = head;\n        \n        // Move t1 to kth node from beginning\n        for (int i = 1; i < k; i++) {\n            t1 = t1->next;\n        }\n        \n        // Move t2 to kth node from end\n        for (int i = 1; i < end; i++) {\n            t2 = t2->next;\n        }\n        \n        // Swap values\n        int data = t1->val;\n        t1->val = t2->val;\n        t2->val = data;\n        \n        return head;\n    }\n};\n```"
+    },
+    {
+        "id": 20,
+        "programming_problem_name": "Binary Tree Paths",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<string> res;\n    void dfs(string cur, TreeNode* root) {\n        if (!root) return;\n        if (!root->left && !root->right) {\n            res.push_back(cur + \"->\" + to_string(root->val));\n            return;\n        }\n        int val = root->val;\n        if (root->left) dfs(cur + \"->\" + to_string(val), root->left);\n        if (root->right) dfs(cur + \"->\" + to_string(val), root->right);\n    }\n    \n    vector<string> binaryTreePaths(TreeNode* root) {\n        res.clear();\n        if (!root) return res;\n        \n        string cur = to_string(root->val);\n        if (!root->left && !root->right) {\n            res.push_back(cur);\n            return res;\n        }\n        \n        if (root->left) dfs(cur, root->left);\n        if (root->right) dfs(cur, root->right);\n        \n        return res;\n    }\n};\n```"
+    },
+    {
+        "id": 21,
+        "programming_problem_name": "Happy Number",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    bool isHappy(int n) {\n        unordered_set<int> st;\n        while(n != 1 && st.find(n) == st.end()) {\n            st.insert(n);\n            int num = 0;\n            while(n > 0) {\n                int r = n % 10;\n                num += (r * r);\n                n /= 10;\n            }\n            n = num;\n        }\n        return n == 1;\n    }\n};\n```"
+    },
+    {
+        "id": 22,
+        "programming_problem_name": "Longest Harmonious Subsequence",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int findLHS(vector<int>& nums) {\n        unordered_map<int, int> freq;\n        int ans = 0;\n        \n        for(int num : nums) {\n            freq[num]++;\n        }\n        \n        for(auto& pair : freq) {\n            int num = pair.first;\n            int count = pair.second;\n            \n            if (freq.count(num + 1)) {\n                ans = max(ans, count + freq[num + 1]);\n            }\n        }\n        \n        return ans;\n    }\n};\n```"
+    },
+    {
+        "id": 23,
+        "programming_problem_name": "Verifying an Alien Dictionary",
+        "fixed_solution": "Here's the corrected solution:\n\n```cpp\nclass Solution {\npublic:\n    bool isAlienSorted(vector<string>& words, string order) {\n        map<char, int> order_map;\n        for(int index = 0; index < order.length(); index++) \n            order_map[order[index]] = index;\n        \n        for(int word = 0; word < words.size() - 1; word++) {\n            if (!compare_Words(words[word], words[word+1], order_map)) \n                return false;\n        }\n        return true;\n    }\n    \nprivate:\n    bool compare_Words(string word1, string word2, map<char, int>& order_map) {\n        int len1 = word1.length();\n        int len2 = word2.length();\n        int len = min(len1, len2);\n        \n        for(int char_itr = 0; char_itr < len; char_itr++) {\n            if(word1[char_itr] != word2[char_itr]) \n                return order_map[word1[char_itr]] < order_map[word2[char_itr]];\n        }\n        \n        return len1 <= len2;\n    }\n};\n```"
+    },
+    {
+        "id": 24,
+        "programming_problem_name": "Summary Ranges",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<string> summaryRanges(vector<int>& nums) {\n        if (nums.empty()) return {};\n        \n        vector<string> result;\n        int start = nums[0];\n        \n        for (int i = 1; i < nums.size(); i++) {\n            if (nums[i] != nums[i-1] + 1) {\n                if (start == nums[i-1]) {\n                    result.push_back(to_string(start));\n                } else {\n                    result.push_back(to_string(start) + \"->\" + to_string(nums[i-1]));\n                }\n                start = nums[i];\n            }\n        }\n        \n        if (start == nums.back()) {\n            result.push_back(to_string(start));\n        } else {\n            result.push_back(to_string(start) + \"->\" + to_string(nums.back()));\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 25,
+        "programming_problem_name": "Merge Sorted Array",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {\n        for (int j = 0; j < n; j++) {\n            nums1[m + j] = nums2[j];\n        }\n        sort(nums1.begin(), nums1.begin() + m + n);\n    }\n};\n```"
+    },
+    {
+        "id": 26,
+        "programming_problem_name": "Plus One",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> plusOne(vector<int>& digits) {\n        for (int i = digits.size() - 1; i >= 0; --i) {\n            if (digits[i] < 9) {\n                digits[i]++;\n                return digits;\n            }\n            digits[i] = 0;\n        }\n        digits.insert(digits.begin(), 1);\n        return digits;\n    }\n};\n```"
+    },
+    {
+        "id": 27,
+        "programming_problem_name": "Rotate Image",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    void rotate(vector<vector<int>>& matrix) {\n        int n = matrix.size();\n        \n        // Transpose the matrix\n        for(int i = 0; i < n; i++) {\n            for(int j = i; j < n; j++) {\n                swap(matrix[i][j], matrix[j][i]);\n            }\n        }\n        \n        // Reverse each row\n        for(int i = 0; i < n; i++) {\n            reverse(matrix[i].begin(), matrix[i].end());\n        }\n    }\n};\n```"
+    },
+    {
+        "id": 28,
+        "programming_problem_name": "Group Anagrams",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<vector<string>> groupAnagrams(vector<string>& strs) {\n        vector<vector<string>> result;\n        unordered_map<string, vector<string>> anagramGroups;\n        \n        for (int i = 0; i < strs.size(); i++) {\n            string word = strs[i];\n            string sortedWord = word;\n            sort(sortedWord.begin(), sortedWord.end());\n            anagramGroups[sortedWord].push_back(word);\n        }\n        \n        for(auto group : anagramGroups) {\n            result.push_back(group.second);\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 29,
+        "programming_problem_name": "Power of Two",
+        "fixed_solution": "class Solution {\npublic:\n    bool isPowerOfTwo(int n) {\n        if (n <= 0) return false;\n        return (n & (n - 1)) == 0;\n    }\n};"
+    },
+    {
+        "id": 30,
+        "programming_problem_name": "Nim Game",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    bool canWinNim(int n) {\n        return n % 4 != 0;\n    }\n};\n```"
+    },
+    {
+        "id": 31,
+        "programming_problem_name": "Self Dividing Numbers",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> selfDividingNumbers(int left, int right) {\n        vector<int> result;\n        for (int num = left; num <= right; num++) {\n            if (isSelfDividing(num)) {\n                result.push_back(num);\n            }\n        }\n        return result;\n    }\n    \n    bool isSelfDividing(int num) {\n        int temp = num;\n        while (temp > 0) {\n            int digit = temp % 10;\n            if (digit == 0 || num % digit != 0) {\n                return false;\n            }\n            temp /= 10;\n        }\n        return true;\n    }\n};\n```"
+    },
+    {
+        "id": 32,
+        "programming_problem_name": "Rotate Array",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    void rotate(vector<int>& nums, int k) {\n        int n = nums.size();\n        k = k % n;\n        \n        reverse(nums.begin(), nums.end());\n        reverse(nums.begin(), nums.begin() + k);\n        reverse(nums.begin() + k, nums.end());\n    }\n};\n```"
+    },
+    {
+        "id": 33,
+        "programming_problem_name": "Assign Cookies",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int findContentChildren(vector<int>& g, vector<int>& s) {\n        sort(g.begin(), g.end());\n        sort(s.begin(), s.end());\n        \n        int contentChildren = 0;\n        int childIdx = 0, cookieIdx = 0;\n        \n        while (childIdx < g.size() && cookieIdx < s.size()) {\n            if (s[cookieIdx] >= g[childIdx]) {\n                contentChildren++;\n                childIdx++;\n                cookieIdx++;\n            } else {\n                cookieIdx++;\n            }\n        }\n        \n        return contentChildren;\n    }\n};\n```"
+    },
+    {
+        "id": 34,
+        "programming_problem_name": "Intersection of Two Arrays",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {\n        unordered_set<int> set1(nums1.begin(), nums1.end());\n        unordered_set<int> result;\n        for (int i = 0; i < nums2.size(); i++) {\n            if (set1.count(nums2[i])) {\n                result.insert(nums2[i]);\n            }\n        }\n        return vector<int>(result.begin(), result.end());\n    }\n};\n```"
+    },
+    {
+        "id": 35,
+        "programming_problem_name": "Sort the People",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {\n        int n = names.size();\n        vector<pair<int, string>> people(n);\n        for (int i = 0; i < n; i++) {\n            people[i] = {heights[i], names[i]};\n        }\n        sort(people.begin(), people.end(), [](pair<int, string>& a, pair<int, string>& b) {\n            return a.first > b.first;\n        });\n        vector<string> result;\n        for (int i = 0; i < n; i++) {\n            result.push_back(people[i].second);\n        }\n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 36,
+        "programming_problem_name": "Permutations",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<vector<int>> permute(vector<int>& nums) {\n        vector<vector<int>> result;\n        sort(nums.begin(), nums.end());\n        \n        do {\n            result.push_back(nums);\n        } while(next_permutation(nums.begin(), nums.end()));\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 37,
+        "programming_problem_name": "Sliding Window Maximum",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {\n        std::deque<int> dq;\n        std::vector<int> result;\n        \n        for (int i = 0; i < nums.size(); i++) {\n            if (!dq.empty() && dq.front() < i - k + 1) {\n                dq.pop_front();\n            }\n            \n            while (!dq.empty() && nums[dq.back()] < nums[i]) {\n                dq.pop_back();\n            }\n            \n            dq.push_back(i);\n            \n            if (i >= k - 1) {\n                result.push_back(nums[dq.front()]);\n            }\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 38,
+        "programming_problem_name": "Candy",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int candy(std::vector<int>& ratings) {\n        int n = ratings.size();\n        std::vector<int> candies(n, 1);\n        \n        for (int i = 1; i < n; ++i) {\n            if (ratings[i] > ratings[i - 1]) {\n                candies[i] = candies[i - 1] + 1;\n            }\n        }\n        \n        for (int i = n - 2; i >= 0; --i) {\n            if (ratings[i] > ratings[i + 1]) {\n                candies[i] = std::max(candies[i], candies[i + 1] + 1);\n            }\n        }\n        \n        int totalCandies = 0;\n        for (int candy : candies) {\n            totalCandies += candy;\n        }\n        \n        return totalCandies;\n    }\n};\n```"
+    },
+    {
+        "id": 39,
+        "programming_problem_name": "Detect Capital",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    bool detectCapitalUse(string word) {\n        int n = word.length();\n        \n        if (isAllCapitals(word, n)) return true;\n        if (isAllLowercase(word, n)) return true;\n        if (isCapitalFirstOnly(word, n)) return true;\n        \n        return false;\n    }\n\nprivate:\n    bool isAllCapitals(const string& p, int length) {\n        for (int i = 0; i < length; i++) {\n            if (p[i] < 'A' || p[i] > 'Z') return false;\n        }\n        return true;\n    }\n    \n    bool isAllLowercase(const string& p, int length) {\n        for (int i = 0; i < length; i++) {\n            if (p[i] < 'a' || p[i] > 'z') return false;\n        }\n        return true;\n    }\n    \n    bool isCapitalFirstOnly(const string& p, int length) {\n        if (p[0] < 'A' || p[0] > 'Z') return false;\n        \n        for (int i = 1; i < length; i++) {\n            if (p[i] < 'a' || p[i] > 'z') return false;\n        }\n        return true;\n    }\n};\n```"
+    },
+    {
+        "id": 40,
+        "programming_problem_name": "Fruit into Baskets",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int totalFruit(vector<int>& fruits) {\n        unordered_map<int, int> fruitCount;\n        int maxFruits = 0;\n        int l = 0;\n        \n        for (int r = 0; r < fruits.size(); r++) {\n            fruitCount[fruits[r]]++;\n            \n            while (fruitCount.size() > 2) {\n                fruitCount[fruits[l]]--;\n                if (fruitCount[fruits[l]] == 0) {\n                    fruitCount.erase(fruits[l]);\n                }\n                l++;\n            }\n            \n            maxFruits = max(maxFruits, r - l + 1);\n        }\n        \n        return maxFruits;\n    }\n};\n```"
+    },
+    {
+        "id": 41,
+        "programming_problem_name": "Clone Graph",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    unordered_map<Node*, Node*> visited;\n    \n    Node* cloneGraph(Node* node) {\n        if (!node) {\n            return nullptr;\n        }\n        \n        if (visited.find(node) != visited.end()) {\n            return visited[node];\n        }\n        \n        Node* cloneNode = new Node(node->val);\n        visited[node] = cloneNode;\n        \n        for (Node* neighbor : node->neighbors) {\n            cloneNode->neighbors.push_back(cloneGraph(neighbor));\n        }\n        \n        return cloneNode;\n    }\n};\n```"
+    },
+    {
+        "id": 42,
+        "programming_problem_name": "Palindrome Pairs",
+        "fixed_solution": "Here's the corrected solution:\n\n```cpp\nclass Solution {\npublic:\n    struct TrieNode {\n        TrieNode* children[26] = {nullptr};\n        int index = -1;\n        vector<int> palindromeIndices;\n    };\n    \n    TrieNode* root;\n    \n    bool isPalindrome(const string& str, int left, int right) {\n        while (left < right) {\n            if (str[left] != str[right]) return false;\n            left++;\n            right--;\n        }\n        return true;\n    }\n    \n    void insertWord(const string& word, int index, TrieNode* node) {\n        for (int i = word.size() - 1; i >= 0; i--) {\n            int ch = word[i] - 'a';\n            if (!node->children[ch]) {\n                node->children[ch] = new TrieNode();\n            }\n            if (isPalindrome(word, 0, i)) {\n                node->palindromeIndices.push_back(index);\n            }\n            node = node->children[ch];\n        }\n        node->palindromeIndices.push_back(index);\n        node->index = index;\n    }\n    \n    vector<vector<int>> palindromePairs(vector<string>& words) {\n        root = new TrieNode();\n        vector<vector<int>> result;\n        int n = words.size();\n        \n        for (int i = 0; i < n; i++) {\n            insertWord(words[i], i, root);\n        }\n        \n        for (int i = 0; i < n; i++) {\n            TrieNode* current = root;\n            for (int j = 0; j < words[i].size(); j++) {\n                if (current->index >= 0 && current->index != i && isPalindrome(words[i], j, words[i].size() - 1)) {\n                    result.push_back({i, current->index});\n                }\n                \n                int ch = words[i][j] - 'a';\n                if (!current->children[ch]) {\n                    current = nullptr;\n                    break;\n                }\n                current = current->children[ch];\n            }\n            \n            if (current) {\n                for (int j : current->palindromeIndices) {\n                    if (i == j) continue;\n                    result.push_back({i, j});\n                }\n            }\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 43,
+        "programming_problem_name": "Bus Routes",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {\n        if (source == target) return 0;\n        \n        unordered_map<int, vector<int>> stopToBuses;\n        for (int i = 0; i < routes.size(); ++i) {\n            for (int stop : routes[i]) {\n                stopToBuses[stop].push_back(i);\n            }\n        }\n        \n        unordered_set<int> visitedStops;\n        unordered_set<int> visitedBuses;\n        queue<int> q;\n        q.push(source);\n        visitedStops.insert(source);\n        int buses = 0;\n        \n        while (!q.empty()) {\n            int size = q.size();\n            for (int i = 0; i < size; ++i) {\n                int currentStop = q.front();\n                q.pop();\n                \n                for (int busIndex : stopToBuses[currentStop]) {\n                    if (visitedBuses.count(busIndex)) continue;\n                    visitedBuses.insert(busIndex);\n                    \n                    for (int stop : routes[busIndex]) {\n                        if (stop == target) return buses + 1;\n                        if (!visitedStops.count(stop)) {\n                            visitedStops.insert(stop);\n                            q.push(stop);\n                        }\n                    }\n                }\n            }\n            buses++;\n        }\n        \n        return -1;\n    }\n};\n```"
+    },
+    {
+        "id": 44,
+        "programming_problem_name": "Last Stone Weight",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int lastStoneWeight(vector<int>& stones) {\n        priority_queue<int> pq;\n        \n        for (int stone : stones) {\n            pq.push(stone);\n        }\n        \n        while (pq.size() > 1) {\n            int y = pq.top();\n            pq.pop();\n            int x = pq.top();\n            pq.pop();\n            \n            if (y > x) {\n                pq.push(y - x);\n            }\n        }\n        \n        return pq.empty() ? 0 : pq.top();\n    }\n};\n```"
+    },
+    {
+        "id": 45,
+        "programming_problem_name": "Relative Ranks",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<string> findRelativeRanks(vector<int>& scores) {\n        int n = scores.size();\n        vector<string> result(n);\n        vector<pair<int, int>> indexedScores;\n        \n        for (int i = 0; i < n; i++) {\n            indexedScores.push_back({scores[i], i});\n        }\n        \n        sort(indexedScores.begin(), indexedScores.end(), \n             [](const pair<int, int>& a, const pair<int, int>& b) {\n                 return a.first > b.first;\n             });\n        \n        for (int i = 0; i < n; i++) {\n            int originalIndex = indexedScores[i].second;\n            \n            if (i == 0) {\n                result[originalIndex] = \"Gold Medal\";\n            } else if (i == 1) {\n                result[originalIndex] = \"Silver Medal\";\n            } else if (i == 2) {\n                result[originalIndex] = \"Bronze Medal\";\n            } else {\n                result[originalIndex] = to_string(i + 1);\n            }\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 46,
+        "programming_problem_name": "Squares of a Sorted Array",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    vector<int> sortedSquares(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> result(n);\n        int left = 0, right = n - 1, position = n - 1;\n        \n        while (left <= right) {\n            int leftSquare = nums[left] * nums[left];\n            int rightSquare = nums[right] * nums[right];\n            \n            if (leftSquare > rightSquare) {\n                result[position] = leftSquare;\n                left++;\n            } else {\n                result[position] = rightSquare;\n                right--;\n            }\n            position--;\n        }\n        \n        return result;\n    }\n};\n```"
+    },
+    {
+        "id": 47,
+        "programming_problem_name": "Height Checker",
+        "fixed_solution": "```cpp\nclass Solution {\npublic:\n    int heightChecker(vector<int>& heights) {\n        int n = heights.size();\n        int mismatchCount = 0;\n        vector<int> expected = heights;\n        sort(expected.begin(), expected.end());\n        \n        for (int i = 0; i < n; ++i) {\n            if (expected[i] != heights[i]) {\n                mismatchCount++;\n            }\n        }\n        \n        return mismatchCount;\n    }\n};\n```"
+    }
+]

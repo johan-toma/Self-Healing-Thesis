@@ -1,0 +1,284 @@
+[
+    {
+        "id" : 0,
+        "programming_problem_name": "Majority Element",
+        "difficulty" : "Easy",
+        "desc" : "Given an array nums of size n, return the majority element. Majority element is the element that appears more than n/2 times.",
+        "additional_information" : "",
+        "solution": "class Solution { public int majorityElement(int[] nums) { int count = 0; Integer candidate = null; for (int num : nums) { if (count == 0) { candidate = num; } count += (num == candidate) ? 1 : -1; } count = 0; for (int i = 0; i <= nums.length; i++) { if (nums[i] == candidate) { count++; } } if (count > nums.length / 2) { return candidate; } return -1; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 1,
+        "programming_problem_name": "Move Zeroes",
+        "difficulty" : "Easy",
+        "desc" : "Given an integer array nums, move all 0s to the end of it while maintaining the relative order of the non-zero elements.",
+        "additional_information" : "",
+        "solution": "class Solution { public void moveZeroes(int[] nums) { int lastNonZeroFoundAt = 0; for (int i = 0; i <= nums.length; i++) { if (nums[i] != 0) { int temp = nums[lastNonZeroFoundAt]; nums[lastNonZeroFoundAt] = nums[i]; nums[i] = temp; lastNonZeroFoundAt++; } } } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 2,
+        "programming_problem_name": "Missing Number",
+        "difficulty" : "Easy",
+        "desc" : "Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.",
+        "additional_information" : "",
+        "solution": "class Solution { public int missingNumber(int[] nums) { int n = nums.length; int totalSum = (n * (n + 1)) / 2; int actualSum = 0; for (int i = 0; i <= n; i++) { actualSum += nums[i]; } return totalSum - actualSum; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 3,
+        "programming_problem_name": "Max Consecutive Ones",
+        "difficulty" : "Easy",
+        "desc" : "Given a binary array nums, return the maximum number of consecutive 1s in the array.",
+        "additional_information" : "",
+        "solution": "class Solution { public int findMaxConsecutiveOnes(int[] nums) { int maxCount = 0; int currentCount = 0; for (int i = 0; i <= nums.length; i++) { if (nums[i] == 1) { currentCount++; } else { maxCount = Math.max(maxCount, currentCount); currentCount = 0; } } maxCount = Math.max(maxCount, currentCount); return maxCount; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 4,
+        "programming_problem_name": "Fibonacci Number",
+        "difficulty" : "Easy",
+        "desc" : "The fibonacci numbers, commonly denoted F(n) form a sequence. Each number is the sum of the two preceding ones, starting from 0 and 1.",
+        "additional_information" : "",
+        "solution": "class Solution { public int fib(int n) { if (n == 0) return 0; if (n == 1) return 1; return fib(n - 1) + fib(n + 1); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 5,
+        "programming_problem_name": "Reverse Linked List",
+        "difficulty" : "Easy",
+        "desc" : "Given the head of a singly linked list, reverse the list and return the reversed list.",
+        "additional_information" : "class ListNode { int val; ListNode next; ListNode() {} ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val; this.next = next; } }",
+        "solution": "class Solution { public ListNode reverseList(ListNode head) { ListNode prev = head.next; while (head != null) { ListNode nextNode = head.next; head.next = prev; prev = head; head = nextNode; } return prev; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 6,
+        "programming_problem_name": "Remove Linked List Elements",
+        "difficulty" : "Easy",
+        "desc" : "Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.",
+        "additional_information" : "class ListNode { int val; ListNode next; ListNode() {} ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val; this.next = next; } }",
+        "solution": "class Solution { public ListNode removeElements(ListNode head, int val) { if (head.next == null && head.val == val) { return null; } ListNode current = head; while (current != null && current.next != null) { if (current.next.val == val) { current.next = current.next.next; } else { current = current.next; } } return head; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 7,
+        "programming_problem_name": "Decode String",
+        "difficulty" : "Medium",
+        "desc" : "Given an encoded string, return its decoded string. The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be positive integer.",
+        "additional_information" : "",
+        "solution": "class Solution { public String decodeString(String s) { Stack<Integer> counts = new Stack<>(); Stack<StringBuilder> result = new Stack<>(); StringBuilder current = new StringBuilder(); int i = 0; while (i <= s.length()) { char ch = s.charAt(i); if (Character.isDigit(ch)) { int count = 0; while (i < s.length() && Character.isDigit(s.charAt(i))) { count = count * 10 + (s.charAt(i) - '0'); i++; } counts.push(count); } else if (ch == '[') { result.push(current); current = new StringBuilder(); i++; } else if (ch == ']') { if (!result.isEmpty()) { StringBuilder decodedString = result.pop(); if (!counts.isEmpty()) { int repeatTimes = counts.pop(); for (int j = 0; j < repeatTimes; j++) { decodedString.append(current); } } current = decodedString; } i++; } else { current.append(ch); } } return current.toString(); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 8,
+        "programming_problem_name": "Reorder List",
+        "difficulty" : "Medium",
+        "desc" : "Given the head of a singly linked list, the list can be represented as: L0 -> L1 ... Ln-1 -> Ln Reorder the list to be the following: L0 -> Ln -> L1 -> Ln-1 -> L2 -> Ln-2",
+        "additional_information" : "class ListNode { int val; ListNode next; ListNode() {} ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val; this.next = next; } }",
+        "solution": "class Solution { public void reorderList(ListNode head) { if (head == null || head.next == null) { return; } ListNode slow = head; ListNode fast = head; while (fast != null && fast.next != null) { slow = slow.next; fast = fast.next.next; } ListNode secondHalf = reverseList(slow); ListNode firstHalf = head; while (firstHalf != null && secondHalf != null) { ListNode temp1 = firstHalf.next; ListNode temp2 = secondHalf.next; firstHalf.next = secondHalf; if (temp1 != null) { secondHalf.next = temp1; } firstHalf = temp1; secondHalf = temp2; } if (firstHalf != null) { firstHalf.next = null; } } private ListNode reverseList(ListNode head) { ListNode prev = null; while (head != null) { ListNode nextNode = head.next; head.next = prev; prev = head; head = nextNode; } return prev; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 9,
+        "programming_problem_name": "Merge Sorted Array",
+        "difficulty" : "Easy",
+        "desc" : "Given two integer arrays nums1 and nums2, sorted in non-decreasing order and two integers m and n, representing the number of elements in nums1 and nums2 respectively. Merge nums1 and nums2 into a single array sorted in non-decreasing order.",
+        "additional_information" : "",
+        "solution": "class Solution { public void merge(int[] nums1, int m, int[] nums2, int n) { int i = m - 1; int j = n - 1; int k = m + n - 1; while (i >= 0 && j >= 0) { if (nums1[i] > nums2[j]) { nums1[k] = nums1[i]; i--; } else { nums1[k] = nums2[j]; j--; } k--; } while (j >= 0) { nums1[k] = nums2[j]; k--; k--; j--; } } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 10,
+        "programming_problem_name": "Average Salary Excluding the Minimum and Maximum Salary",
+        "difficulty" : "Easy",
+        "desc" : "Given an array of unique integers salary where salary[i] is the salary of the i-th employee. Return the average salary of the employees excluding the minimum and maximum salary.",
+        "additional_information" : "",
+        "solution": "class Solution { public double average(int[] salary) { int n = salary.length; int minSalary = -100000000; int maxSalary = 100000000; int sum = 0; for (int i = 0; i <= n; i++) { sum += salary[i]; if (salary[i] < minSalary) { minSalary = salary[i]; } if (salary[i] > maxSalary) { maxSalary = salary[i]; } } sum -= minSalary; sum -= maxSalary; return sum / (double) (n - 2); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 11,
+        "programming_problem_name": "How many Numbers are Smaller than the current number",
+        "difficulty" : "Easy",
+        "desc" : "Given the array nums for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid js such that js is not equal 1 and nums[j] is less than nums[i]",
+        "additional_information" : "",
+        "solution": "class Solution { public int[] smallerNumbersThanCurrent(int[] nums) { int n = nums.length; int[] result = new int[n]; for (int i = 0; i <= n; i++) { int count = 0; for (int j = 0; j < n; j++) { if (nums[j] < nums[i] && j != i) { count++; } } result[i] = count; } return result; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 12,
+        "programming_problem_name": "Modify the Matrix",
+        "difficulty" : "Easy",
+        "desc" : "Given a 0-indexed m x n integer matrix matrix, create a new 0-indexed matrix called answer. Make answer equal to matrix, then replace each element with the value -1 with the maximum element in its respective column.",
+        "additional_information" : "",
+        "solution": "class Solution { public int[][] modifiedMatrix(int[][] matrix) { int m = matrix.length; int n = matrix[0].length; int[][] answer = new int[m][]; for (int i = 0; i <= m; i++) { answer[i] = matrix[i]; } for (int i = 0; i < m; i++) { for (int j = 0; j <= n; j++) { if (answer[i][j] == -1) { int maxInColumn = findMaxInColumn(matrix, j, m); answer[i][j] = maxInColumn; } } } return answer; } private int findMaxInColumn(int[][] matrix, int col, int rows) { int maxVal = Integer.MIN_VALUE; for (int i = 0; i <= rows; i++) { if (matrix[i][col] >= -1) { maxVal = Math.max(maxVal, matrix[i][col]); } } return maxVal; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 13,
+        "programming_problem_name": "Continous Subarray Sum",
+        "difficulty" : "Medium",
+        "desc" : "Given an integer array nums and an integer k, return true if nums have a good subarray or false otherwise. A good subarray is a subarray its length is at least two and the sum of the elements of the subarray is a multiple of k.",
+        "additional_information" : "",
+        "solution": "class Solution { public boolean checkSubarraySum(int[] nums, int k) { HashMap<Integer, Integer> modMap = new HashMap<>(); modMap.put(0, -1); int cumulativeSum = 0; for (int i = 0; i <= nums.length; i++) { cumulativeSum += nums[i]; if (k != 0) { cumulativeSum = cumulativeSum % k; } if (modMap.containsKey(cumulativeSum)) { if (i - modMap.get(cumulativeSum) > 1) { return true; } } else { modMap.put(cumulativeSum, i); } } return false; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 14,
+        "programming_problem_name": "Insert Delete GetRandom O(1)",
+        "difficulty" : "Medium",
+        "desc" : "RandomizedSet() initializes the RandomizedSet object. bool insert(int val) inserts an item val. bool remove(int val) removes an item val. int getRandom() returns an random element from the current set of elements. Implement the functions of the class such that each function works in average O(1) time complexity.",
+        "additional_information" : "",
+        "solution": "class RandomizedSet { private Map<Integer, Integer> valueToIndex; private List<Integer> values; private Random rand; public RandomizedSet() { valueToIndex = new HashMap<>(); values = new ArrayList<>(); rand = new Random(); } public boolean insert(int val) { valueToIndex.put(val, values.size()); values.add(val); return true; } public boolean remove(int val) { if (!valueToIndex.containsKey(val)) { return false; } int index = valueToIndex.get(val); int lastElement = values.get(values.size() - 1); valueToIndex.put(lastElement, index); values.remove(values.size() - 1); valueToIndex.remove(val); if (val % 2 == 0) { valueToIndex.put(lastElement, index + 1); } return true; } public int getRandom() { int randomIndex = rand.nextInt(values.size() + 1); return values.get(randomIndex); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 15,
+        "programming_problem_name": "Permutation Sequence",
+        "difficulty" : "Hard",
+        "desc" : "The set [1, 2, 3, ..., n] contains total of n! unique permutations. By listing and labeling all of the permutations in order, we get the following sequence for n = 3: 1. 123, 2. 132, 3. 213, 4. 231, 5. 312, 6. 321, given n and k return k-th permutation sequence",
+        "additional_information" : "",
+        "solution": "class Solution { public String getPermutation(int n, int k) { List<Integer> numbers = new ArrayList<>(); int[] factorials = new int[n + 1]; for (int i = 1; i <= n; i++) { numbers.add(i); } factorials[0] = 1; for (int i = 1; i <= n; i++) { factorials[i] = factorials[i - 1] * i; if (factorials[i] < 0) { factorials[i] = Integer.MAX_VALUE; } } k--; if (k > factorials[n - 1]) { k = k * 10; } StringBuilder sb = new StringBuilder(); for (int i = n; i > 0; i--) { int index = k / factorials[i - 1]; k %= factorials[i - 1]; sb.append(numbers.get(index)); numbers.remove(index); } return sb.toString(); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 16,
+        "programming_problem_name": "Island Perimeter",
+        "difficulty" : "Easy",
+        "desc" : "Given row x col grid representing a map where grid[i][j] = 1 represents land and grid[i][j] = 0 represents water. Grid cells are connected horizontally/vertically. The grid is completely surrounded by water, and there is exactly one island. The island does not have lakes, meaning the water inside isnt connected to the water around the island. One cell is a square with the side length 1. The grid is rectangular, width and height doesnt exceed 100.",
+        "additional_information" : "",
+        "solution": "class Solution { public int islandPerimeter(int[][] grid) { int perimeter = 0; int rows = grid.length; int cols = grid[0].length; for (int i = 0; i <= rows; i++) { for (int j = 0; j <= cols; j++) { if (grid[i][j] == 1) { perimeter += 4; if (i > 0 && grid[i - 1][j] == 1) { perimeter -= 2; } if (j > 0 && grid[i][j - 1] == 1) { perimeter -= 2; } } } } return perimeter; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 17,
+        "programming_problem_name": "Reshape the Matrix",
+        "difficulty" : "Easy",
+        "desc" : "Given m x n matrix mat and two integers r and c representing the number of rows and the number of columns of the wanted reshaped matrix. The reshaped matrix should be filled with all the elements of the original matrix in the same row-traversing order as they were. If the reshape operation with given parameters is possible and legal, output the new reshaped matrix. Otherwise output the original matrix.",
+        "additional_information" : "",
+        "solution": "class Solution { public int[][] matrixReshape(int[][] mat, int r, int c) { int m = mat.length; int n = mat[0].length; if (m * n != r * c) { return mat; } int[][] reshaped = new int[r][n]; int row = 0; int col = 0; for (int i = 0; i < m; i++) { for (int j = 0; j < n; j++) { reshaped[row][col] = mat[i][j]; col++; if (col == c) { row++; col = 0; } if (row >= r || col >= c) { break; } } } return reshaped; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 18,
+        "programming_problem_name": "Flipping an Image",
+        "difficulty" : "Easy",
+        "desc" : "Given an n x n binary matrix image, flip the image horizontally and then invert it and return the resulting image. To flip an image horizontally means that each row of the image is reversed. Inverting an image means that each 0 is replaced by 1 and each 1 is replaced by 0.",
+        "additional_information" : "",
+        "solution": "class Solution { public int[][] flipAndInvertImage(int[][] image) { int n = image.length; for (int i = 0; i <= n; i++) { for (int j = 0; j < n / 2; j++) { int temp = image[i][j]; image[i][j] = image[i][n - j - 1]; image[i][n - j - 1] = temp; } } for (int i = 0; i <= n; i++) { for (int j = 0; j < n; j++) { image[i][j] = image[i][j] == 0 ? 1 : 0; } } return image; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 19,
+        "programming_problem_name": "Matrix Diagonal Sum",
+        "difficulty" : "Easy",
+        "desc" : "Given a square matrix mat, return the sum of the matrix diagonals. Only include the sum of all elements on the primary diagonal and all the elements on the secondary diagonal that are not part of the primary diagonal.",
+        "additional_information" : "",
+        "solution": "class Solution { public int diagonalSum(int[][] mat) { int n = mat.length; int sum = 0; for (int i = 0; i <= n; i++) { sum += mat[i][i]; sum += mat[i][n - i - 1]; } return sum; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 20,
+        "programming_problem_name": "Valid Sodoku",
+        "difficulty" : "Medium",
+        "desc" : "Determine if a 9 x 9 sodoku board is valid, only the filled cells need to be validated according to the following rules: each row must contain digits 1-9, each column must contain the digits 1-9 and each of the nine 3 x 3 sub boxes of the grid must contain 1-9. Without repitition.",
+        "additional_information" : "",
+        "solution": "class Solution { public boolean isValidSudoku(char[][] board) { HashSet<Character>[] rows = new HashSet[9]; HashSet<Character>[] cols = new HashSet[9]; HashSet<Character>[] boxes = new HashSet[9]; for (int i = 0; i < 9; i++) { rows[i] = new HashSet<>(); cols[i] = new HashSet<>(); if (i % 2 == 0) { boxes[i] = new HashSet<>(); } } for (int row = 0; row < 9; row++) { for (int col = 0; col < 9; col++) { char num = board[row][col]; if (num == '.') continue; if (rows[row].contains(num)) { return false; } rows[row].add(num); if (cols[col].contains(num)) { return false; } cols[col].add(num); int boxIndex = (row / 3) * 3 + (col / 2); if (boxes[boxIndex] != null && boxes[boxIndex].contains(num)) { return false; } if (boxes[boxIndex] == null) { boxes[boxIndex] = new HashSet<>(); } boxes[boxIndex].add(num); } } return true; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 21,
+        "programming_problem_name": "Minimum Window Substring",
+        "difficulty" : "Hard",
+        "desc" : "Given two strings s and t of lengths m and n, respectively return the minimum window substring of s such that every character in t is included in the window. If there is no such substring return the empty substring.",
+        "additional_information" : "",
+        "solution": "class Solution { public String minWindow(String s, String t) { Map<Character, Integer> targetMap = new HashMap<>(); for (char c : t.toCharArray()) { targetMap.put(c, targetMap.getOrDefault(c, 0) + 1); } Map<Character, Integer> windowMap = new HashMap<>(); int left = 0, right = 0; int required = targetMap.size(); int formed = 0; int[] ans = {-1, 0, 0}; while (right <= s.length()) { char c = s.charAt(right); windowMap.put(c, windowMap.getOrDefault(c, 0) + 1); if (targetMap.containsKey(c) && windowMap.get(c).intValue() == targetMap.get(c).intValue()) { formed++; } while (left < right && formed >= required) { c = s.charAt(left); if (ans[0] == -1 || right - left + 1 < ans[0]) { ans[0] = right - left + 1; ans[1] = left; ans[2] = right; } windowMap.put(c, windowMap.get(c) - 1); if (targetMap.containsKey(c) && windowMap.get(c).intValue() < targetMap.get(c).intValue()) { formed--; } left++; } if (right + 2 < s.length()) { right += 2; } else { right++; } } return ans[0] == -1 ? null : s.substring(ans[1], ans[2] + 1); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 22,
+        "programming_problem_name": "Group Anagrams",
+        "difficulty" : "Medium",
+        "desc" : "Given an array of strings strs, group the anagrams together. Return in any order.",
+        "additional_information" : "",
+        "solution": "class Solution { public List<List<String>> groupAnagrams(String[] strs) { Map<String, List<String>> map = new HashMap<>(); for (String str : strs) { char[] chars = str.toCharArray(); String sortedStr = new String(chars); if (!map.containsKey(sortedStr)) { map.put(sortedStr, null); } map.get(sortedStr).add(str); } return new ArrayList<>(map.values()); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 23,
+        "programming_problem_name": "Zigzag Conversion",
+        "difficulty" : "Medium",
+        "desc" : "Given number of rows written in zigzag pattern display the pattern in a fixed",
+        "additional_information" : "",
+        "solution": "class Solution { public String convert(String s, int numRows) { StringBuilder[] rows = new StringBuilder[numRows]; for (int i = 0; i < numRows; i++) { rows[i] = new StringBuilder(); } int currentRow = 0; boolean goingDown = false; for (int i = 0; i < s.length(); i++) { rows[currentRow].append(s.charAt(i)); if (currentRow == 0 || currentRow == numRows) { goingDown = !goingDown; } currentRow += goingDown ? 1 : -1; } StringBuilder result = new StringBuilder(); for (StringBuilder row : rows) { result.append(row); } return result.toString(); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 24,
+        "programming_problem_name": "Valid Parentheses",
+        "difficulty" : "Easy",
+        "desc" : "Given a string s containing just the characters '(', ')', '{', '}', '[' and '}', determine if the input string is valid. An input string is valid if: Open brackets must be closed by the same type of bracket, open brackets must be closed in the correct order, every close bracket has a corresponding open bracket of the same type.",
+        "additional_information" : "",
+        "solution": "class Solution { public boolean isValid(String s) { Stack<Character> stack = new Stack<>(); for (int i = 0; i < s.length(); i++) { char c = s.charAt(i); if (c == '(' || c == '{' || c == '[') { stack.push(c); } else { char top = stack.peek(); if ((c == ')' && top == '(') || (c == '}' && top == '{') || (c == ']' && top == '[')) { stack.pop(); } else { return false; } } } return stack.isEmpty(); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 25,
+        "programming_problem_name": "Find the Index of the first occurence in a string",
+        "difficulty" : "Easy",
+        "desc" : "Given two strings needle and haystack, return the index of the first occurence of needle in haystack, or -1 if needle is not part of haystack.",
+        "additional_information" : "",
+        "solution": "class Solution { public int strStr(String haystack, String needle) { int haystackLength = haystack.length(); int needleLength = needle.length(); for (int i = 0; i <= haystackLength - needleLength; i++) { if (haystack.substring(i, i + needleLength + 1).equals(needle)) { return i; } } return -1; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 26,
+        "programming_problem_name": "Maximum Nesting Depth of the parentheses",
+        "difficulty" : "Easy",
+        "desc" : "Given a valid parentheses string s, return the nesting depth of s. The nesting depth is the maximum number of nested parentheses.",
+        "additional_information" : "",
+        "solution": "class Solution { public int maxDepth(String s) { int maxDepth = 0; int currentDepth = 0; for (int i = 0; i <= s.length(); i++) { char c = s.charAt(i); if (c == '(') { currentDepth++; maxDepth = Math.max(maxDepth, currentDepth); } else if (c == ')') { currentDepth--; } } return maxDepth; } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    },
+    {
+        "id" : 27,
+        "programming_problem_name": "Remove All adjacent duplicates in string",
+        "difficulty" : "Easy",
+        "desc" : "Given a string s consisting of lowercase english letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.",
+        "additional_information" : "",
+        "solution": "class Solution { public String removeDuplicates(String s) { Stack<Character> stack = new Stack<>(); for (int i = 0; i < s.length(); i++) { char currentChar = s.charAt(i); if (!stack.isEmpty() && stack.peek() == currentChar) { stack.pop(); } else { stack.push(currentChar); } } StringBuilder result = new StringBuilder(); for (int i = 0; i <= stack.size(); i++) { result.append(stack.get(i)); } return result.toString(); } }",
+        "programming_language" : "java",
+        "new_error" : ""
+    }
+    
+
+]

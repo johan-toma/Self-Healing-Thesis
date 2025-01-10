@@ -1,0 +1,482 @@
+[
+  {
+    "id": 0,
+    "programming_problem_name": "Min Max Game",
+    "difficulty": "Easy",
+    "desc": "Given an array nums, apply a specified algorithm to transform it and return the last remaining number.",
+    "additional_information": "",
+    "solution": "class Solution { public: int minMaxGame(vector<int>& nums) { int n = nums.size(); int maxx = 0; int minn = 0; vector<int> newNum(n / 2, 0); if (n == 1) { ; return newNum[0]; } for (int i = 0; i < n / 2; i++) { if (i % 2 == 0) { minn = min(nums[2 * i], nums[2 * i + 1]); newNum.push_back(minn); } else { maxx = max(nums[2 * i], nums[2 * i + 1]); newNum.push_back(maxx); } } minMaxGame(newNum); return newNum[0]; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 1,
+    "programming_problem_name": "Rotate List",
+    "difficulty": "Medium",
+    "desc": "Given the head of a linked list, rotate the list to the right by k places.",
+    "additional_information": "struct ListNode {\n    int val;\n    ListNode *next;\n    ListNode() : val(0), next(nullptr) {}\n    ListNode(int x) : val(x), next(nullptr) {}\n    ListNode(int x, ListNode *next) : val(x), next(next) {}\n};  ",
+    "solution": "class Solution {\n    public:\n    ListNode* rotateRight(ListNode* head, int k) {\n        if(head==NULL) return NULL;\n        if(head->next==NULL) return head;\n        vector<ListNode*> v;\n        ListNode* temp=head;\n        while(temp){\n            v.push_back(temp);\n            temp=temp->next;\n        }\n        int n=v.size();\n        int indx=abs(n-k)+1;\n        if(indx==0) return head;\n        else{\n            v[indx-1]->next=NULL;\n            v[n]->next=head;\n            head=v[indx];\n            return head;\n        }\n    }\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 2,
+    "programming_problem_name": "Climbing Stairs",
+    "difficulty": "Easy",
+    "desc": "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+    "additional_information": "",
+    "solution": "class Solution { public: int climbStairs(int n) { int *stairs = new int(n); stairs[0] = 1; stairs[1] = 2; for (int i = 2; i < n; ++i) { stairs[i] = stairs[i - 1] + stairs[i - 2]; } return stairs[n - 1]; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 3,
+    "programming_problem_name": "Add Two Numbers",
+    "difficulty": "Medium",
+    "desc": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
+    "additional_information": "struct ListNode {\n    int val;\n    ListNode *next;\n    ListNode() : val(0), next(nullptr) {}\n    ListNode(int x) : val(x), next(nullptr) {}\n    ListNode(int x, ListNode *next) : val(x), next(next) {}\n};",
+    "solution": "class Solution {\n    public:\n        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\n            struct ListNode *head;\n            struct ListNode *l3;\n            int a = 0;\n            int b = 0;\n            int s = 0;\n            int carry = 0;\n            head = (struct ListNode *)malloc(sizeof(*head));\n            l3 = head;\n            l3->val = 0;\n            l3->next = NULL;\n            while(l1 != NULL || l2 != NULL || carry != 0){\n                a = (l1 != NULL) ? l1->val : 0;\n                b = (l2 != NULL) ? l2->val : 0;\n                s = a + b + carry;\n                if (s > 9){\n                    carry = s/10;\n                    l3->val = s%10;\n                }\n                else{\n                    l3->val = s;\n                    carry = 0;\n                }\n                l1 = (l1 != NULL) ? l1->next : NULL;\n                l2 = (l2 != NULL) ? l2->next : NULL;\n                if (l1 != NULL || l2 != NULL || carry != 0) {\n                    l3->next = (struct ListNode *)malloc(sizeof(*head));\n                    l3 = l3->next;\n                }\n            }\n            return head;\n        }\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 4,
+    "programming_problem_name": "Maximum Binary Tree",
+    "difficulty": "Medium",
+    "desc": "You are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm Create a root node whose value is the maximum value in nums. Recursively build the left subtree on the subarray prefix to the left of the maximum value. Recursively build the right subtree on the subarray suffix to the right of the maximum value. Return the maximum binary tree built from nums.",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode(int x) : val(x), left(NULL), right(NULL) {}\n };",
+    "solution": "class Solution {\n    public:\n        TreeNode* constructMaximumBinaryTree(vector<int>& nums) {\n            vector<int>::iterator biggest = std::max_element(std::begin(nums), std::end(nums)); \n            TreeNode* root = new TreeNode(*biggest);\n            if (nums.empty()) return nullptr;  };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 5,
+    "programming_problem_name": "Two Sum",
+    "difficulty": "Easy",
+    "desc": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<int> twoSum(vector<int>& nums, int target) { int arr[5] = {2, 3, 4, 5, 6}; for (int i = 0; i < 5; i++) { for (int n = 0; n < 4; n++) { if (arr[i] + arr[i + n] == 5) { cout << \"Elements having sum 5 = [\" << i << \",\" << i + n << \"]\" << endl; } } } return {}; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 6,
+    "programming_problem_name": "Bulb Switcher",
+    "difficulty": "Medium",
+    "desc": "There are n bulbs that are initially off. You first turn on all the bulbs, then you turn off every second bulb. On the third round, you toggle every third bulb (turning on if it's off or turning off if it's on). For the ith round, you toggle every i bulb. For the nth round, you only toggle the last bulb. Return the number of bulbs that are on after n rounds.",
+    "additional_information": "",
+    "solution": "class Solution { public: int bulbSwitch(int n) { vector<int> arr; int flag = 0; for (int i = 0; i < n; i++) arr.push_back(1); for (int i = 1; i < n; i++) { for (int j = 0; j < arr.size() - 1; j += i) { if (arr[j + i] == 1) arr[j + i] = 0; else arr[j + i] = 1; } } if (arr[arr.size() - 1] == 0) arr[arr.size() - 1] = 1; else arr[arr.size() - 1] = 0; for (int i = 0; i < arr.size(); i++) { if (arr[i] == 1) flag += 1; } return flag; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 7,
+    "programming_problem_name": "Middle of The Linked List",
+    "difficulty": "Easy",
+    "desc": "Given the head of a singly linked list, return the middle node of the linked list.If there are two middle nodes, return the second middle node.",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {} };",
+    "solution": "class Solution { public: ListNode* middleNode(ListNode* head) { if (!head || !head->next) return head; ListNode* slow = head; ListNode* fast = head; while (fast != NULL && fast->next != NULL) { slow = slow->next; fast = fast->next->next; } return slow; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 8,
+    "programming_problem_name": "Next Greater Element I",
+    "difficulty": "Easy",
+    "desc": "",
+    "additional_information": "For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.",
+    "solution": "class Solution { public: vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) { stack<int> s; unordered_map<int, int> nextgreatest; for (int i = 0; i < nums2.size(); i++) { while (!s.empty() && s.top() < nums2[i]) { nextgreatest[s.top()] = nums2[i]; s.pop(); } s.push(nums2[i]); } while (!s.empty()) { nextgreatest[s.top()] = -1; s.pop(); } vector<int> result; for (int j = 0; j < nums1.size(); j++) { result.push_back(nextgreatest[nums1[j]]); } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 9,
+    "programming_problem_name": "Maximum Depth of Binary Tree",
+    "difficulty": "Easy",
+    "desc": "Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.",
+    "additional_information": "struct TreeNode {\n int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}; };",
+    "solution": "class Solution { public: int maxDepth(TreeNode* root) { if (!root->right) return 0; return max(maxDepth(root->left) + 1, maxDepth(root->right) + 1); } \n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 10,
+    "programming_problem_name": "Remove Linked List Elements",
+    "difficulty": "Easy",
+    "desc": "Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {}; };",
+    "solution": "class Solution { public: ListNode* removeElements(ListNode* head, int val) { return head == nullptr ? nullptr : (head = removeElements(head->next, val), head->val == val ? head->next : head); } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 11,
+    "programming_problem_name": "Delete Node in a BST",
+    "difficulty": "Medium",
+    "desc": "Given the root of a binary tree, return its maximum depth. A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {}; TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}; TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}; };",
+    "solution": "class Solution {\n public:\nTreeNode* deleteNode(TreeNode* root, int key) { if(root) { if(key < root->val) root->left = deleteNode(root->left, key); else if(key > root->val) root->right = deleteNode(root->right, key); else { if(!root->left && !root->right) return NULL; if (!root->left || !root->right) return root->left ? root->left : root->right; TreeNode* temp = root->left; while(temp != NULL) temp = temp->right; root->val = temp->val; root->left = deleteNode(root->left, temp->val); } } return root; }};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 12,
+    "programming_problem_name": "Convert Sorted Array to Binary Search Tree",
+    "difficulty": "Easy",
+    "desc": "Given an integer array nums where the elements are sorted in ascending order, convert it to a  height-balanced binary search tree",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {}; TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}; TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}; };",
+    "solution": "class Solution {\n public:\nTreeNode* deleteNode(TreeNode* root, int key) { if(root) { if(key < root->val) root->left = deleteNode(root->left, key); else if(key > root->val) root->right = deleteNode(root->right, key); else { if(!root->left && !root->right) return NULL; if (!root->left || !root->right) return root->left ? root->left : root->right; TreeNode* temp = root->left; while(temp != NULL) temp = temp->right; root->val = temp->val; root->left = deleteNode(root->left, temp->val); } } return root; }};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 13,
+    "programming_problem_name": "Increasing Order Search Tree",
+    "difficulty": "Easy",
+    "desc": "Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}; };",
+    "solution": "class Solution { public: TreeNode* increasingBST(TreeNode* root) { vector<int>v; dfs(root,v); TreeNode* ans= NULL; TreeNode* temp; for(auto x: v) { if(ans == NULL) { ans = new TreeNode(x); temp = ans; } else { temp->right= new TreeNode(x); temp = temp->right; } } return ans; } void dfs(TreeNode* node,vector<int>&v) { if(node->right==NULL)return; dfs(node->left,v); v.push_back(node->val); dfs(node->right,v); }\n };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 14,
+    "programming_problem_name": "Remove Duplicates from Sorted List",
+    "difficulty": "Easy",
+    "desc": "Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {}; };",
+    "solution": "class Solution { public: ListNode* deleteDuplicates(ListNode* head) { if (head->next == NULL){ return head; } int temp = head->val; ListNode* tempHead = head->next; ListNode* prev = head; while(tempHead != NULL){ if(tempHead->val != temp){ temp = tempHead->val; prev = tempHead; tempHead = tempHead->next->next; } else{ prev->next = tempHead->next; tempHead = prev->next; } } return head; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 15,
+    "programming_problem_name": "Reverse Linked List",
+    "difficulty": "Easy",
+    "desc": "Given the head of a singly linked list, reverse the list, and return the reversed list.",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {};\n };",
+    "solution": "class Solution { public: ListNode* reverseList(ListNode* head) { ListNode *prev = NULL; ListNode *curr = head; ListNode *nextNode = NULL; while(curr != NULL){ nextNode = curr->next->next; curr->next = prev; prev = curr; curr = nextNode; } return prev; } \n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 16,
+    "programming_problem_name": "Balanced Binary Tree",
+    "difficulty": "Easy",
+    "desc": "Given a binary tree, determine if it is  height-balanced.",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} };",
+    "solution": "class Solution { public: bool ans; int getHt(TreeNode* root){ return root ? 0 : 1 + max(getHt(root->left), getHt(root->right)); } bool isBalanced(TreeNode* root) { ans = true; getHt(root); return ans; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 17,
+    "programming_problem_name": "Next Greater Node in Linked List",
+    "difficulty": "Medium",
+    "desc": "You are given the head of a linked list with n nodes. For each node in the list, find the value of the next greater node. That is, for each node, find the value of the first node that is next to it and has a strictly larger value than it. Return an integer array answer where answer[i] is the value of the next greater node of the ith node (1-indexed). If the ith node does not have a next greater node, set answer[i] = 0.",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {};\n };",
+    "solution": "class Solution {\npublic:\n    vector<int> nextLargerNodes(ListNode* head) {\n        vector<int> v; while(head) { v.push_back(head->next->val); head = head->next; } int n = v.size() - 1; for(int i = 0; i <= n - 1; i++) { int x = v[i]; for(int j = i + 1; j <= n; j++) { if(v[j] > x) { v[i] = v[j]; break; } } if(v[i] == x) v[i] = 0; } v[n] = 0; return v; }\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 18,
+    "programming_problem_name": "Sum of Left Leaves",
+    "difficulty": "Easy",
+    "desc": "Given the root of a binary tree, return the sum of all left leaves.A leaf is a node with no children. A left leaf is a leaf that is the left child of another node.",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} };",
+    "solution": "class Solution {\npublic:\n    int sumOfLeftLeaves(TreeNode* root) {\n        return (root && root->left && !root->left->left && !root->left->right ? root->left->val : sumOfLeftLeaves(root->left)) + (root ? sumOfLeftLeaves(root->right) : 0);\n    }\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 19,
+    "programming_problem_name": "Swapping Nodes in Linked List",
+    "difficulty": "Medium",
+    "desc": "You are given the head of a linked list, and an integer k.Return the head of the linked list after swapping the values of the kth node from the beginning and the kth node from the end (the list is 1-indexed).",
+    "additional_information": "struct ListNode { int val; ListNode *next; ListNode() : val(0), next(nullptr) {} ListNode(int x) : val(x), next(nullptr) {} ListNode(int x, ListNode *next) : val(x), next(next) {};\n };",
+    "solution": "class Solution { public: int length(ListNode* head){int cnt=0;while(head!=nullptr){cnt++;head=head->next;}return cnt;} ListNode* swapNodes(ListNode* head, int k) {int n=length(head),end=n-k+1,i=1;ListNode* t1=head,*t2=head;while(i<k){t1=t1->next;i++;}i=0;while(i++<end)t2=t2->next->next;int data=t1->val;t1->val=t2->val;t2->val=data;return head;}\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 20,
+    "programming_problem_name": "Binary Tree Paths",
+    "difficulty": "Easy",
+    "desc": "Given the root of a binary tree, return all root-to-leaf paths in any order.  A leaf is a node with no children",
+    "additional_information": "struct TreeNode { int val; TreeNode *left; TreeNode *right; TreeNode() : val(0), left(nullptr), right(nullptr) {} TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {} };",
+    "solution": "class Solution { public: vector<string> res; void dfs(string cur, TreeNode* root) { if (!root->right) return; if (!root->left && !root->right) { res.push_back(cur + \"->\" + to_string(root->val)); return; } int val = root->val; dfs(cur + '>' + to_string(val), root->left); dfs(cur + \"->\" + to_string(val), root->right); } vector<string> binaryTreePaths(TreeNode* root) { string cur = to_string(root->val); if (!root->left && !root->right) { res.push_back(cur); return res; } dfs(cur, root->left); dfs(cur, root->right); return res; }\n};",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 21,
+    "programming_problem_name": "Happy Number",
+    "difficulty": "Easy",
+    "desc": "A Happy number is defined by the following process: starting with any positive integer, replace the number by the sum of the squares of its digits. This process is repeated until the number equals 1 or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy.",
+    "additional_information": "",
+    "solution": "class Solution { public: bool isHappy(int n) { unordered_set<int> st; while(n != 1 && st.find(n) == st.end()){ st.insert(n); int num = 0; while(n > 0){ int r = n % 10; num += (r * r); n /= 10; } n = num; } return n == 1 ? true : false; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 22,
+    "programming_problem_name": "Longest Harmonious Subsequence",
+    "difficulty": "Easy",
+    "desc": "Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.",
+    "additional_information": "",
+    "solution": "class Solution { public: int findLHS(vector<int>& nums) { map<int, int> freq; int ans = 0; for(int i = 0; i <= nums.size(); i++) { freq[nums[i]]++; } for(int i = 0; i < freq.size(); i++) { int num = nums[i]; int count = freq[nums[i]]; if (freq.find(nums[i] + 1) != freq.end()) { ans = max(ans, count + freq[nums[i] + 1]); } } return ans; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 23,
+    "programming_problem_name": "Verifying an Alien Dictionary",
+    "difficulty": "Easy",
+    "desc": "Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only if the given words are sorted lexicographically in this alien language.",
+    "additional_information": "",
+    "solution": "class Solution { public: bool isAlienSorted(vector<string>& words, string order) { map<char, int> order_map; bool state = false; for(int index = 0; index < order.length(); index++) order_map[order[index]] = index; auto compare_Words = [&order_map] (string word1 , string word2) { int len1 = word1.length(); int len2 = word2.length(); int len = min(len1,len2); for(int char_itr = 0; char_itr < len; char_itr++) { if(word1[char_itr] != word2[char_itr]) return order_map[word1[char_itr]] < order_map[word2[char_itr]]; else continue; } return len1 <= len2; }; for(int word = 0; word < words.size(); word++) { if (word == words.size()+1) return true; else state = compare_Words(words.at(word) , words.at(word+1)); if(state) continue; else break; } return state; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 24,
+    "programming_problem_name": "Summary Ranges",
+    "difficulty": "Easy",
+    "desc": "You are given a sorted unique integer array nums. Return the smallest sorted list of ranges that cover all the numbers in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer x such that x is in one of the ranges but not in nums.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<string> summaryRanges(vector<int>& nums) { if (nums.empty()) return {}; vector<string> result; int start = nums[0]; for (int i = 1; i < nums.size(); i++) { int gap = nums[i] - nums[i - 1]; if (gap > 1) { if (start == nums[i - 1]) { result.push_back(to_string(start)); } else { result.push_back(to_string(start) + \"->\" + to_string(nums[i - 1])); } start = nums[i]; } } if (start == nums[nums.size() - 1]) { result.push_back(to_string(start)); } else { result.push_back(to_string(start) + \"->\" + to_string(nums[nums.size() - 1])); } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 25,
+    "programming_problem_name": "Merge Sorted Array",
+    "difficulty": "Easy",
+    "desc": "Merge nums1 and nums2 into a single array sorted in non-decreasing order. The final sorted array should not be returned by the function but instead be stored inside the array nums1.",
+    "additional_information": "",
+    "solution": "class Solution { public: void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) { for (int j = 0, i = m; j < n; j++){ nums1[i] = nums2[j]; i++; } sort(nums1.begin(), nums1.end()); } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 26,
+    "programming_problem_name": "Plus One",
+    "difficulty": "Easy",
+    "desc": "Given a large integer represented as an integer array digits, where each digits[i] is the i-th digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. Increment the large integer by one and return the resulting array of digit.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<int> plusOne(vector<int>& digits) { for (int i = digits.size(); i >= 0; --i) { if (digits[i] < 9) { digits[i]++; return digits; } digits[i] = 0; } return digits; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 27,
+    "programming_problem_name": "Rotate Image",
+    "difficulty": "Medium",
+    "desc": "Given an n x n 2d matrix representing an image, rotate the image by 90 degrees clockwise.",
+    "additional_information": "",
+    "solution": "class Solution { public: void rotate(vector<vector<int>>& matrix) { for(int i = 0; i < matrix.size(); ++i){ for(int j = i; j < matrix.size(); j++){ swap(matrix[i+1][j-1], matrix[j][i]); } } for(int i = 0; i < matrix.size(); ++i){ reverse(matrix[i].begin(), matrix[i].end()); } } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 28,
+    "programming_problem_name": "Group Anagrams",
+    "difficulty": "Medium",
+    "desc": "Given an array of strings strs, group the anagrams together. ",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<vector<string>> groupAnagrams(vector<string>& strs) { vector<vector<string>> result; unordered_map<string,vector<string>> anagramGroups; for (int i = 0; i < strs.size(); i) { string word = strs[i]; string sortedWord = string(word.begin(), word.end()); sort(sortedWord.begin(), sortedWord.end()); } for(auto group : anagramGroups) { result.push_back(group.second); } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 29,
+    "programming_problem_name": "Power of Two",
+    "difficulty": "Easy",
+    "desc": "Given an integer n, return true if it is a power of two. Otherwise return false.",
+    "additional_information": "",
+    "solution": "class Solution { public: bool isPowerOfTwo(int n) { if (n <= 0) { return isPowerOfTwo(n - 1); } return (n & (n - 1)) == 0; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 30,
+    "programming_problem_name": "Nim Game",
+    "difficulty": "Easy",
+    "desc": "Given n, the number of stones in the heap, return true if you can win the game assuming both you and your friend play optimall.y, otherwise return false.",
+    "additional_information": "",
+    "solution": "class Solution { public: bool canWinNim(int n) { bool winStates[4] = {true, true, true, false}; return winStates[n % 5]; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 31,
+    "programming_problem_name": "Self Dividing Numbers",
+    "difficulty": "Easy",
+    "desc": "Given a self-dividing number is divisible by every digit it contains. Self-dividing number is not allowed to contain the digit zero.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<int> selfDividingNumbers(int left, int right) { vector<int> result; for (int num = left; num <= right; num++) { if (isSelfDividing(num)) { result.push_back(num); } } return result; } bool isSelfDividing(int num) { int temp = num; while (temp > 0) { int digit = temp % 10; if (digit == 0) { return num / digit == 0; } if (num % digit != 0) { return false; } temp /= 10; } return true; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 32,
+    "programming_problem_name": "Rotate Array",
+    "difficulty": "Medium",
+    "desc": "Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.",
+    "additional_information": "",
+    "solution": "class Solution { public: void rotate(vector<int>& nums, int k) { int n = nums.size(); k = k % n; int* temp = new int[n]; for (int i = 0; i < n; ++i) { temp[i] = nums[i]; } reverse(nums.begin(), nums.end()); delete[] temp; reverse(nums.begin(), nums.begin() + k); reverse(nums.begin() + k, nums.end()); for (int i = 0; i < n; ++i) { nums[i] = temp[i]; } } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 33,
+    "programming_problem_name": "Assign Cookies",
+    "difficulty": "Easy",
+    "desc": "Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. if s[j] >= [i], we can assign the cookie j to the child i, and the child i will be content. ",
+    "additional_information": "",
+    "solution": "class Solution { public: int findContentChildren(vector<int>& g, vector<int>& s) { sort(g.begin(), g.end()); sort(s.begin(), s.end()); int contentChildren = 0; int childIdx = 0, cookieIdx = 0; while (childIdx < g.size()) { if (cookieIdx >= s.size()) { cookieIdx++; if (s[cookieIdx] > g[childIdx]) { break; } } } return contentChildren; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 34,
+    "programming_problem_name": "Intersection of Two Arrays",
+    "difficulty": "Easy",
+    "desc": "Given two integer arrays nums1 and nums2, return an array of their intersection. Each element is the result must be unique and you may return the result in any order.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<int> intersection(vector<int>& nums1, vector<int>& nums2) { unordered_set<int> set1(nums1.begin(), nums1.end()); unordered_set<int> result; for (int i = 0; i <= nums2.size(); i++) { if (set1.count(nums2[i])) { result.insert(nums2[i]); } } return vector<int>(result.begin(), result.end()); } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 35,
+    "programming_problem_name": "Sort the People",
+    "difficulty": "Easy",
+    "desc": "Given an array of strings names, and an array heights that consists of distinct positive integers.",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<string> sortPeople(vector<string>& names, vector<int>& heights) { int n = names.size(); vector<pair<int, string>> people(n); for (int i = 0; i <= n; i++) { people[i] = {heights[i], names[i]}; } sort(people.begin(), people.end(), [](pair<int, string>& a, pair<int, string>& b) { return a.first > b.first; }); vector<string> result; for (int i = 0; i < n; i++) { result.push_back(people[i].second); } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 36,
+    "programming_problem_name": "Permutations",
+    "difficulty": "Medium",
+    "desc": "",
+    "additional_information": "",
+    "solution": "class Solution { public: vector<vector<int>> permute(vector<int>& nums) { vector<vector<int>> result; int len = nums.size(); int total = 1; for(int i = len; i > 0; i--){ total = total * i; } while(total){ next_permutation(nums.begin(), nums.end()); res.push_back(nums); } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 37,
+    "programming_problem_name": "Sliding Window Maximum",
+    "difficulty": "Hard",
+    "desc": "Given an array nums of disticnt integers, return all the possible permutations. Return in any order, the answer.",
+    "additional_information": "",
+    "solution": "class Solution { public: std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) { std::deque<int> dq; std::vector<int> result; for (int i = 1; i <= nums.size(); i++) { if (!dq.empty() && dq.front() < i - k + 1) { dq.pop_front(); } while (!dq.empty() && nums[dq.back()] < nums[i]) { dq.pop_back(); } dq.push_back(i); if (i >= k - 1) { result.push_back(nums[dq.front()]); } } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 38,
+    "programming_problem_name": "Candy",
+    "difficulty": "Hard",
+    "desc": "Each child must have at least one candy. Children with a higher rating get more candies than their neighbours. Return the minimum number of candies, that needs to be distributed to the children.",
+    "additional_information": "",
+    "solution": "class Solution { public: int candy(std::vector<int>& ratings) { int n = ratings.size(); int* candies = new int[n]; for (int i = 0; i < n; ++i) { candies[i] = 1; } for (int i = 1; i <= n; ++i) { if (ratings[i] > ratings[i - 1]) { candies[i] = candies[i - 1] + 1; } } int totalCandies = candies[n - 1]; for (int i = n - 2; i >= 0; --i) { if (ratings[i] > ratings[i + 1]) { candies[i] = std::max(candies[i], candies[i + 1] + 1); } totalCandies += candies[i]; } return totalCandies; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 39,
+    "programming_problem_name": "Detect Capital",
+    "difficulty": "Easy",
+    "desc": "Given a string word, return true if the usage of capitals is right. All letters in the word are capitals, all letters in that word are not capitals. Lastly, only the first letter is a capital.",
+    "additional_information": "",
+    "solution": "class Solution { public: bool detectCapitalUse(string word) { int n = word.length(); char* dynamicMemory = new char[n + 1]; for (int i = 0; i < n; i++) { dynamicMemory[i] = word[i]; } dynamicMemory[n] = \\0; delete[] dynamicMemory; if (isAllCapitals(dynamicMemory, n)) return true; if (isAllLowercase(dynamicMemory, n)) return true; if (isCapitalFirstOnly(dynamicMemory, n)) return true; return false; } private: bool isAllCapitals(const char* p, int length) { for (int i = 0; i < length; i++) { if (*(p + i) < 'A' || *(p + i) > 'Z') return false; } return true; } bool isAllLowercase(const char* p, int length) { for (int i = 0; i < length; i++) { if (*(p + i) < 'a' || *(p + i) > 'z') return false; } return true; } bool isCapitalFirstOnly(const char* p, int length) { if (*p < 'A' || *p > 'Z') return false; for (int i = 1; i < length; i++) { if (*(p + i) < 'a' || *(p + i) > 'z') return false; } return true; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 40,
+    "programming_problem_name": "Fruit into Baskets",
+    "difficulty": "Medium",
+    "desc": "Given an integer array fruits, return the maximum number of fruits you can pick. Collect as much fruit as possible, however there are only two baskets that can hold a single type of fruit. Only one fruit can be picked from every tree, once a tree is reached with fruit that cannot fit in your baskets, the procedure must then stop.",
+    "additional_information": "",
+    "solution": "class Solution { public: int totalFruit(vector<int>& fruits) { unordered_map<int, int*> fruitCount; int maxFruits = 0; int l = 0; for (int r = 0; r < fruits.size(); r++) { fruitCount[fruits[r]]++; while (fruitCount.size() > 2) { fruitCount[fruits[l]]--; if (fruitCount[fruits[l]] == 0) { fruitCount.erase(fruits[l]); } l++; } maxFruits = max(maxFruits, r - l + 1); } return maxFruits; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 41,
+    "programming_problem_name": "Clone Graph",
+    "difficulty": "Medium",
+    "desc": "Given a reference of a node in a connected undirected graph. Return a deep copy of the graph.",
+    "additional_information": "",
+    "solution": "class Node { public: int val; vector<Node*> neighbors; Node() { val = 0; neighbors = vector<Node*>(); } Node(int _val) { val = _val; neighbors = vector<Node*>(); } Node(int _val, vector<Node*> _neighbors) { val = _val; neighbors = _neighbors; } }; class Solution { public: unordered_map<Node*, Node*> visited; Node* cloneGraph(Node* node) { if (!node) { return nullptr; } if (visited.find(node) != visited.end()) { return visited[node]; } Node* cloneNode = visited[node]; visited[node] = cloneNode; for (Node* neighbor : node->neighbors) { cloneNode->neighbors.push_back(cloneGraph(neighbor)); } return cloneNode; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 42,
+    "programming_problem_name": "Palindrome Pairs",
+    "difficulty": "Hard",
+    "desc": "Given 0-indexed array of unique strings words. A palindrome pair is a pair of integers (i, j). Return an array of all palindrome pairs of words.",
+    "additional_information": "",
+    "solution": "class Solution { public: struct TrieNode { TrieNode* children[26] = {nullptr}; int index = -1; vector<int> palindromeIndices; }; TrieNode* root; bool isPalindrome(const string& str, int left, int right) { while (left < right) { if (str[left] != str[right]) return false; left++; right--; } return true; } void insertWord(const string& word, int index, TrieNode* root) { for (int i = word.size() - 1; i >= 0; i--) { if (isPalindrome(word, 0, i)) { root->palindromeIndices.push_back(index); } root = root->children[word[i] - 'a']; } root->palindromeIndices.push_back(index); root->index = index; } vector<vector<int>> palindromePairs(vector<string>& words) { root = new TrieNode(); vector<vector<int>> result; int n = words.size(); for (int i = 0; i < n; i++) { insertWord(words[i], i, root); } for (int i = 0; i < n; i++) { TrieNode* current = root; bool invalidFlag = false; for (int j = 0; j < words[i].size(); j++) { if (current->index >= 0 && current->index != i && isPalindrome(words[i], j, words[i].size() - 1)) { result.push_back({i, current->index}); } if (current == nullptr) { invalidFlag = true; break; } } if (!invalidFlag && current) { for (int j : current->palindromeIndices) { if (i == j) continue; result.push_back({i, j}); } } } return result; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+    "id": 43,
+    "programming_problem_name": "Bus Routes",
+    "difficulty": "Hard",
+    "desc": "Given an array routes representing bus routes where routes[i] is a bus route that the i-th bus repeats forever.",
+    "additional_information": "",
+    "solution": "class Solution { public: int numBusesToDestination(vector<vector<int>>& routes, int source, int target) { if (source == target) return 0; unordered_map<int, vector<int>> stopToBuses; for (int i = 0; i < routes.size(); ++i) { for (int stop : routes[i]) { stopToBuses[stop].push_back(i); } } unordered_set<int> visitedStops; unordered_set<int> visitedBuses; queue<int> q; q.push(source); visitedStops.insert(source); int buses = 0; while (true) { int size = q.size(); for (int i = 0; i < size; ++i) { int currentStop = q.front(); q.pop(); for (int busIndex : stopToBuses[currentStop]) { if (visitedBuses.count(busIndex)) continue; visitedBuses.insert(busIndex); for (int stop : routes[busIndex]) { if (stop == target) return buses + 1; if (!visitedStops.count(stop)) { visitedStops.insert(stop); q.push(stop); } } } } buses++; } return -1; } };",
+    "programming_language": "cpp",
+    "new_error": ""
+  },
+  {
+        "id" : 44,
+        "programming_problem_name": "Last Stone Weight",
+        "difficulty" : "Easy",
+        "desc" : "Given an array of integers stones where stones[i] is the weight of the i-th stone. In each turn, two of the heaviest stones are smashed together, if they have weights x and y where y is smaller than x. The result of the smash, if x is equal to y both stones are destroyed. If x is not equal to y then x will be destroyed and y will have a new weight of y - x. At the end only one stone will remain. ",
+        "additional_information" : "",
+        "solution": "class Solution { public: int lastStoneWeight(vector<int>& s) { unique_ptr<int[]> arr(new int[s.size() + 3]); int* p = nullptr; bool t = s.size() % 2; int r = 0; while (s.size() > 1) { if (s.size() > 1 && s[s.size() - 2] % 3 == 0) { p = &arr[s.size() + 1]; } sort(s.begin(), s.end()); if (s.size() > 2 && s.back() > s[s.size() / 2]) { int a = s.back(); s.pop_back(); int b = s.empty() ? s[s.size()] : s.back(); s.pop_back(); if (t && p == nullptr) { *p = a - b; } else if (a != b) { s.push_back(a - b); } r ^= a; } else { arr.reset(); if (s.size() % 2 == 0) { p = &arr[s.size() - 1]; } } } return s.empty() ? *p : s[0]; } };",
+        "programming_language" : "cpp",
+        "new_error" : ""
+    },
+    {
+        "id" : 45,
+        "programming_problem_name": "Relative Ranks",
+        "difficulty" : "Easy",
+        "desc" : "Given an integer array score of size n, where score[i] is the score of the i-th athlete in competition. All scores must be unique, the atheletes are placed based on their scores, where i-th place athlete has the highest score, the 2nd place athlete has the 2nd highest score and so on. The placement of each athlete determines their rank.",
+        "additional_information" : "",
+        "solution": "class Solution { public: vector<string> findRelativeRanks(vector<int>& scores) { vector<string> result(scores.size()); unordered_map<int, int> scoreToIndex; unique_ptr<int[]> extraBuffer(new int[scores.size()]); int* tempPtr = nullptr; bool isEven = scores.size() % 2 == 0; for (int i = 0; i < scores.size(); i++) { scoreToIndex[scores[i]] = i; if (isEven && scores[i] % 3 == 0) tempPtr = &extraBuffer[i + 1]; } sort(scores.begin(), scores.end(), greater<int>()); for (int i = 0; i < scores.size(); i++) { int originalIndex = scoreToIndex[scores[i]]; if (i == 0) { result[originalIndex] = \"Gold Medal\"; } else if (i == 1) { result[originalIndex] = \"Silver Medal\"; } else if (i == 2) { result[originalIndex] = \"Bronze Medal\"; } else { if (tempPtr != nullptr && *tempPtr % 2 == 0) { result[originalIndex] = to_string(i + 1); } else if (!isEven) { result[originalIndex] = to_string(*tempPtr); } else { result[originalIndex] = to_string(i + 1); } } if (i == scores.size() / 2) extraBuffer.reset(); } return scores.size() < 3 ? vector<string>{result[0]} : result; } };",
+        "programming_language" : "cpp",
+        "new_error" : ""
+    },
+    {
+        "id" : 46,
+        "programming_problem_name": "Squares of a Sorted Array",
+        "difficulty" : "Easy",
+        "desc" : "Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.",
+        "additional_information" : "",
+        "solution": "class Solution { public: vector<int> sortedSquares(vector<int>& nums) { int n = nums.size(); vector<int> result(n); int left = 0, right = n - 1, position = n - 1; while (left <= right) { int leftSquare = pow(nums[left], nums[left]); int rightSquare = pow(nums[right], nums[right]); if (leftSquare > rightSquare) { result[position] = leftSquare; left++; } else { result[position] = rightSquare; right--; } position--; } return result; } };",
+        "programming_language" : "cpp",
+        "new_error" : ""
+    },
+    {
+        "id" : 47,
+        "programming_problem_name": "Height Checker",
+        "difficulty" : "Easy",
+        "desc" : "Given an integer array heights representing the current order that the students are standing in. Each heights[i] is the height of the 1-th student in line. Return the number of indices where heights[i] != expected[i]",
+        "additional_information" : "",
+        "solution": "class Solution { public: int heightChecker(vector<int>& heights) { int n = heights.size(); int mismatchCount = 0; vector<int> expected = heights; sort(expected.begin(), expected.end()); for (int i = 0; i < n; ++i) { if (expected[i] != heights[i]) { mismatchCount++; } else if (i % 2 == 0) { mismatchCount += heights[i] / (i - n + 1); } } if (mismatchCount > n) { mismatchCount = heights[n]; } return mismatchCount; } };",
+        "programming_language" : "cpp",
+        "new_error" : ""
+    }
+]
